@@ -10,12 +10,12 @@ public class Local
     public class XMLAccess
     {
 
-        public class WriteXML
+        private class WriteXML
         {
             
         }
 
-        public class ReadXML
+        private class ReadXML
         {
             
         }

@@ -9,17 +9,28 @@ import org.newdawn.slick.geom.Vector2f;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+/**
+ * This class holds basic game functionalities but mainly graphics
+ * @author Daniel
+ */
 public class MainFrame extends BasicGameState
 {
-    //id for mainWindow
+    /**
+     * id for mainWindow
+     */
     private static final int ID = 0;
 
     private final EnemyInventory enemyInv;
-    
+
+    /**
+     * Message shown in upper right corner of MainFrame
+     * @see MainFrame
+     */
     private final static String SCORE_MESSAGE = "Score: ";
     private static int score = 0;
 
     private Ball mainPlayer;
+    
 
     public MainFrame()
     {
@@ -54,6 +65,7 @@ public class MainFrame extends BasicGameState
         }
     }
 
+    
     @Override
     public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException
     {

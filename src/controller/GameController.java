@@ -1,10 +1,9 @@
 package controller;
 
 import graphics.MainFrame;
+import graphics.MainMenu;
 import java.io.File;
-import org.lwjgl.input.Cursor;
 import org.newdawn.slick.*;
-import org.newdawn.slick.opengl.ImageData;
 import org.newdawn.slick.state.StateBasedGame;
 
 
@@ -18,44 +17,43 @@ public class GameController extends StateBasedGame
     public static final int MAIN_MENU = 1;
     //public static final int GAME         = 2;
 
-    // Application Properties
-    public static final int WIDTH = 640;
-    public static final int HEIGHT = 480;
-    public static final int FPS = 45;
-    public static final double VERSION = 2019.10;
-
-
-
     public GameController()
             throws SlickException
     {
         super("Main Controller");
     }
 
-
-    public static void main(String[] args)
+    @Override
+    protected void postUpdateState(GameContainer container, int delta) throws SlickException
     {
-        System.setProperty("org.lwjgl.librarypath", new File("E:\\POS\\Projects\\APIs\\slick").getAbsolutePath());
-        //System.setProperty("java.library.path", new File("E:\\POS\\Projects\\APIs\\slick").getAbsolutePath());
-
-        try
-        {
-            AppGameContainer container = new AppGameContainer(new GameController(), WIDTH, HEIGHT, false);
-            container.setTargetFrameRate(FPS);
-            container.setShowFPS(true);
-            container.start();
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-
+        super.postUpdateState(container, delta); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    protected void preUpdateState(GameContainer container, int delta) throws SlickException
+    {
+        super.preUpdateState(container, delta); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void postRenderState(GameContainer container, Graphics g) throws SlickException
+    {
+        super.postRenderState(container, g); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    protected void preRenderState(GameContainer container, Graphics g) throws SlickException
+    {
+        super.preRenderState(container, g); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
+    
 
     @Override
     public void initStatesList(GameContainer container) throws SlickException
     {
+        this.addState(new MainMenu());
         this.addState(new MainFrame()); //first added will be started first
     }
 }
