@@ -2,8 +2,9 @@ package controller;
 
 import graphics.MainFrame;
 import graphics.MainMenu;
-import java.io.File;
+import graphics.SettingsMenu;
 import org.newdawn.slick.*;
+import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 
@@ -12,23 +13,43 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameController extends StateBasedGame
 {
 
+    private static final String GAME_TITLE = "Basic First Slick Game";
+    
+    
     // Game state identifiers
     public static final int MAIN_GAME = 0;
     public static final int MAIN_MENU = 1;
-    //public static final int GAME         = 2;
+    public static final int SETTINGS_MENU = 2;
+    
 
+    private final MainMenu menu;
+    private final MainFrame game;
+    
     public GameController()
             throws SlickException
     {
-        super("Main Controller");
+        super(GAME_TITLE);
+        
+        menu = new MainMenu();
+        game = new MainFrame();
     }
 
     @Override
     protected void postUpdateState(GameContainer container, int delta) throws SlickException
     {
-        super.postUpdateState(container, delta); //To change body of generated methods, choose Tools | Templates.
+        //change to enum
+        GameState curr = super.getCurrentState();
+        if(curr == menu){
+            //this.enterState(MAIN_GAME);
+        }
+        else if(curr == game){
+            
+        }
+        
     }
 
+    
+    
     @Override
     protected void preUpdateState(GameContainer container, int delta) throws SlickException
     {
@@ -46,14 +67,13 @@ public class GameController extends StateBasedGame
     {
         super.preRenderState(container, g); //To change body of generated methods, choose Tools | Templates.
     }
-
-    
     
 
     @Override
     public void initStatesList(GameContainer container) throws SlickException
     {
-        this.addState(new MainMenu());
-        this.addState(new MainFrame()); //first added will be started first
+        this.addState(menu);
+        this.addState(new SettingsMenu());
+        this.addState(game); //first added will be started first
     }
 }

@@ -14,10 +14,10 @@ public class Enemy extends Rectangle
     public static final int DEFAULT_WIDTH = 10;
     public static final int DEFAULT_HEIGHT = 10;
     
-    private int enemyValue;
+    private final long enemyValue;
     
-    private final int id;
-    public int getID(){
+    private final long id;
+    public long getID(){
         return id;
     }
 
@@ -39,7 +39,7 @@ public class Enemy extends Rectangle
         return fillColor;
     }
     
-    public int getEnemyValue(){
+    public long getEnemyValue(){
         return enemyValue;
     }
 }

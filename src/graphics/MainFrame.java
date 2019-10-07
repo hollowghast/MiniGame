@@ -10,7 +10,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
- * This class holds basic game functionalities but mainly graphics
+ * This class is mainly used for graphics
  * @author Daniel
  */
 public class MainFrame extends BasicGameState
@@ -27,11 +27,10 @@ public class MainFrame extends BasicGameState
      * @see MainFrame
      */
     private final static String SCORE_MESSAGE = "Score: ";
-    private static int score = 0;
+    private static long score = Long.MAX_VALUE;
 
     private Ball mainPlayer;
     
-
     public MainFrame()
     {
         enemyInv = new EnemyInventory();
@@ -53,7 +52,7 @@ public class MainFrame extends BasicGameState
     public void render(GameContainer gc, StateBasedGame game, Graphics grphcs) throws SlickException
     {
         grphcs.setColor(Color.white);
-        grphcs.drawString(SCORE_MESSAGE + score, gc.getWidth()-150, 0);
+        grphcs.drawString(SCORE_MESSAGE + score, gc.getWidth()-gc.getWidth()/2, 0);
         
         grphcs.setColor(mainPlayer.getFillColor());
         grphcs.fill(mainPlayer);
@@ -125,16 +124,15 @@ public class MainFrame extends BasicGameState
                 enemyInv.addRandom(
                         new Enemy(
                             new Random()
-                                    .nextInt(gc.getWidth()+
-                                            Enemy.DEFAULT_WIDTH)-
-                                    Enemy.DEFAULT_WIDTH, 
+                                    .nextInt(gc.getWidth()-Enemy.DEFAULT_WIDTH), 
                             new Random()
-                                    .nextInt(gc.getHeight()+
-                                            Enemy.DEFAULT_HEIGHT)-
-                                    Enemy.DEFAULT_HEIGHT));
+                                    .nextInt(gc.getHeight()-Enemy.DEFAULT_HEIGHT)
+                        )
+                );
                 break;
             }
         }
     }
+
 
 }
