@@ -33,8 +33,8 @@ public abstract class MenuItem
 
 
     public boolean isAt(int x, int y){
-        System.out.println("mi startposition: " + startPosition);
-        System.out.println("mi endposition: " + endPosition);
+        //System.out.println("mi startposition: " + startPosition);
+        //System.out.println("mi endposition: " + endPosition);
         
         if(x > startPosition.x && x < endPosition.x){
             if(y > startPosition.y && y < endPosition.y){
@@ -68,5 +68,7 @@ public abstract class MenuItem
         return this.startPosition.y  + this.endPosition.y;
     }
     
-    protected abstract void switchState(GameContainer container, StateBasedGame game);
+    protected void switchState(GameContainer container, StateBasedGame game){
+        this.clicked = false;
+    }
 }

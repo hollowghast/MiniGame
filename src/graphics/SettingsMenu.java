@@ -1,10 +1,11 @@
 package graphics;
 
+import controller.GameController;
+import static graphics.AbstractMenu.DEFAULT_CHAR_WIDTH;
 import java.util.Random;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 /**
@@ -31,8 +32,27 @@ public class SettingsMenu extends AbstractMenu
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
     {
-        Random r = new Random();
-        g.drawRect(r.nextInt(container.getWidth()), r.nextInt(container.getHeight()), r.nextInt(container.getWidth()), r.nextInt(container.getHeight()));
+        super.init(container, game);
+        
+        String title = "Switch Color";
+        menuItems.add(new MenuItem(lastMenuPosition.x,
+                lastMenuPosition.y, title.length() * DEFAULT_CHAR_WIDTH,
+                DEFAULT_CHAR_HEIGHT, title)
+        {
+            @Override
+            protected void switchState(GameContainer container, StateBasedGame game)
+            {
+                super.switchState(container, game);
+                //container.exit();
+                System.out.println("Color Menu");
+                
+                
+            }
+
+        });
+        syncLastMenuPosition();
+        
+        
     }
 
     @Override

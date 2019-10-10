@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Colors>
+  <Player>
+    <Color type="rgb">#affeca</Color>
+  </Player>
+  <!-- Enemy should go here too -->
+  <Text>
+    <Color type="rgb">#ff3300</Color>
+  </Text>
+</Colors>
