@@ -37,11 +37,11 @@ public class EnemyInventory
 //            }
 //        }
 //        
-////        for(int i = 0; i< enemies.size(); i++){
-////            if(enemies.get(i).getID() == id){
-////                enemies.remove(i);
-////            }
-////        }
+//        for(int i = 0; i< enemies.size(); i++){
+//            if(enemies.get(i).getID() == id){
+//                enemies.remove(i);
+//            }
+//        }
 //        
 //    }
 }

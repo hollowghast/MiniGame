@@ -2,9 +2,7 @@ package graphics;
 
 import controller.GameController;
 import static graphics.AbstractMenu.DEFAULT_CHAR_WIDTH;
-import java.util.Random;
 import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -26,12 +24,6 @@ public class SettingsMenu extends AbstractMenu
     @Override
     public void init(GameContainer container, StateBasedGame game) throws SlickException
     {
-        
-    }
-
-    @Override
-    public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException
-    {
         super.init(container, game);
         
         String title = "Switch Color";
@@ -46,19 +38,30 @@ public class SettingsMenu extends AbstractMenu
                 //container.exit();
                 System.out.println("Color Menu");
                 
-                
+                ColorChangingDialog ccd = new ColorChangingDialog(null, true);
+                ccd.setLocation(container.getWidth(), container.getHeight());
+                ccd.setTitle("Set Colors");
+                ccd.setVisible(true);
+                ccd.dispose();
             }
 
         });
         syncLastMenuPosition();
         
-        
-    }
+        title = "Back";
+        menuItems.add(new MenuItem(lastMenuPosition.x,
+                lastMenuPosition.y, title.length() * DEFAULT_CHAR_WIDTH,
+                DEFAULT_CHAR_HEIGHT, title)
+        {
+            @Override
+            protected void switchState(GameContainer container, StateBasedGame game)
+            {
+                super.switchState(container, game);
+                //container.exit();
+                game.enterState(GameController.MAIN_MENU);
+            }
 
-    @Override
-    public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException
-    {
-        
+        });
+        syncLastMenuPosition();
     }
-    
 }

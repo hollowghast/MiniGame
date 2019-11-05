@@ -1,5 +1,6 @@
 package controller;
 
+import dal.LocalFileAccess;
 import java.io.File;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.Game;
@@ -28,6 +29,8 @@ public class MainController extends AppGameContainer
         System.setProperty("org.lwjgl.librarypath", new File("E:\\POS\\Projects\\APIs\\slick").getAbsolutePath());
         //System.setProperty("java.library.path", new File("E:\\POS\\Projects\\APIs\\slick").getAbsolutePath());
 
+        new LocalFileAccess();
+        
         try
         {
             MainController controller = new MainController(new GameController());

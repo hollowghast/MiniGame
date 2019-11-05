@@ -1,5 +1,6 @@
 package graphics;
 
+import controller.GameController;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.StateBasedGame;
@@ -40,6 +41,8 @@ public class MainMenu extends AbstractMenu
                 //container.exit();
                 System.out.println("Game Menu");
                 
+                game.enterState(GameController.GAME_MENU);
+                
             }
 
         });
@@ -57,16 +60,8 @@ public class MainMenu extends AbstractMenu
                 //container.exit();
                 //System.out.println("Settings");
                 
-                ColorChangingDialog ccd = new ColorChangingDialog(null, true);
-                //ccd.setLocation((int) this.getX(),(int) this.getY());
-                //ccd.setLocation((int) super.getX(),(int) super.getY());
-                //ccd.setLocation(container.getScreenWidth()/2, container.getHeight()/2);
-                ccd.setLocation(container.getWidth(), container.getHeight());
-                ccd.setTitle("Set Colors");
-                ccd.setVisible(true);
-                ccd.dispose();
                 
-                //game.enterState(GameController.SETTINGS_MENU);
+                game.enterState(GameController.SETTINGS_MENU);
             }
 
         });
@@ -88,7 +83,6 @@ public class MainMenu extends AbstractMenu
         });
         syncLastMenuPosition();
         
-        //game.enterState(0);
         
     }
 

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JColorChooser;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -97,6 +99,13 @@ public class ColorChangingDialog extends javax.swing.JDialog
         panelButtons.add(onOK);
 
         onCancel.setText("Cancel");
+        onCancel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                onCancelActionPerformed(evt);
+            }
+        });
         panelButtons.add(onCancel);
 
         getContentPane().add(panelButtons, java.awt.BorderLayout.SOUTH);
@@ -116,33 +125,15 @@ public class ColorChangingDialog extends javax.swing.JDialog
 
     private void formWindowOpened(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowOpened
     {//GEN-HEADEREND:event_formWindowOpened
-        LocalFileAccess.XMLAccess.setFile(new File(FilesEnum.COLORS.getPath()));
         try
         {
-            //read file
-            LocalFileAccess.XMLAccess.XMLReader.read();
-            
-            //load color of player
-            Color playerCol = Color.decode(
-                    LocalFileAccess.XMLAccess.XMLReader
-                            .getElement("Color", "Player", null, null)
-                            .getValue().trim());
-            this.tfPlayerColor.setBackground(playerCol);
-            //load color of text
-            Color textCol = Color.decode(
-                    LocalFileAccess.XMLAccess.XMLReader
-                            .getElement("Color", "Text", null, null)
-                            .getValue().trim());
-            this.tfTextColor.setBackground(textCol);
-        } catch (IOException ex)
-        {
-            System.out.println("io exception");
-            ex.printStackTrace();
+            tfPlayerColor.setBackground(ColorInventory.getColorFor("Player"));
+            tfTextColor.setBackground(ColorInventory.getColorFor("Text"));
         } catch (JDOMException ex)
         {
-            System.out.println("jdom exception");
             ex.printStackTrace();
         }
+
     }//GEN-LAST:event_formWindowOpened
 
     private void tfTextColorMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tfTextColorMouseClicked
@@ -162,37 +153,44 @@ public class ColorChangingDialog extends javax.swing.JDialog
         {
             Element colorElement = LocalFileAccess.XMLAccess.XMLReader
                     .getElement("Color", "Player", null, null);
-            
+
             //substring(2) to remove alpha
-            String hexValOfNewColor = "#" + 
-                    Integer.toHexString(tfPlayerColor.getBackground()
+            String hexValOfNewColor = "#"
+                    + Integer.toHexString(tfPlayerColor.getBackground()
                             .getRGB()).substring(2);
-            
-            if(!hexValOfNewColor.equalsIgnoreCase(colorElement.getValue())){
+
+            if (!hexValOfNewColor.equalsIgnoreCase(colorElement.getValue()))
+            {
                 LocalFileAccess.XMLAccess.XMLWriter
                         .setValueFor(colorElement, hexValOfNewColor);
             }
-            
+
             colorElement = LocalFileAccess.XMLAccess.XMLReader
-                            .getElement("Color", "Text", null, null);
+                    .getElement("Color", "Text", null, null);
             hexValOfNewColor = "#" + Integer.toHexString(tfTextColor.getBackground().getRGB()).substring(2);
-            
-            if(!hexValOfNewColor.equalsIgnoreCase(colorElement.getValue())){
+
+            if (!hexValOfNewColor.equalsIgnoreCase(colorElement.getValue()))
+            {
                 LocalFileAccess.XMLAccess.XMLWriter.setValueFor(colorElement, hexValOfNewColor);
             }
-            
+
             LocalFileAccess.XMLAccess.XMLWriter.writeCurrentDocument();
         } catch (JDOMException ex)
         {
             System.err.println("Error while writing new values to elements");
-        }
-        catch(IOException e){
+        } catch (IOException e)
+        {
             System.err.println(e.getMessage());
-        }
-        finally{
+        } finally
+        {
             this.setVisible(false);
         }
     }//GEN-LAST:event_onOKActionPerformed
+
+    private void onCancelActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_onCancelActionPerformed
+    {//GEN-HEADEREND:event_onCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_onCancelActionPerformed
 
     /**
      * @param args the command line arguments

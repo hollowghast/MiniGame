@@ -4,7 +4,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Vector2f;
 
-public class Ball extends Ellipse
+public class Ball extends Ellipse implements Observer
 {
     public static final int SPEED = 10;
     public static final int DIAMETER = 20;
@@ -13,6 +13,8 @@ public class Ball extends Ellipse
     private Color fillColor;
     
     private final Vector2f position;
+    
+    private ObservableSubject<Color> subject;
     
     public Ball(float x, float y)
     {
@@ -24,12 +26,31 @@ public class Ball extends Ellipse
         position.add(transition);
     }
     
-     public Color getFillColor()
+    public void setColor(Color c){
+        this.fillColor = c;
+    }
+    
+    public Color getFillColor()
     {
         if (fillColor == null)
         {
             return DEFAULT_FILLCOLOR;
         }
         return fillColor;
+    }
+
+    @Override
+    public void update()
+    {
+        Object obj = subject.getValueFor(Enemy.class.getName());
+        if(obj instanceof Color){
+            fillColor = (Color) obj;
+        }
+    }
+
+    @Override
+    public void setObservableSubject(ObservableSubject sub)
+    {
+        subject = sub;
     }
 }
