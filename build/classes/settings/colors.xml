@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Colors>
+    <Player>
+        <Color type="rgb">#99ff00</Color>
+    </Player>
+    <Enemy>
+        <Color type="rgb">#ccccff</Color>
+    </Enemy>
+    <Text>
+        <Color type="rgb">#ccccff</Color>
+    </Text>
+</Colors>
